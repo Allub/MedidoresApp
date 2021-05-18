@@ -91,7 +91,6 @@ namespace ClienteMedidor
         public static int GetNroMedidor()
         {
             int aux = -1;
-            string auxStr = "" + aux;
             do
             {
                 Console.WriteLine("Ingrese numero de Medidor");
@@ -107,6 +106,104 @@ namespace ClienteMedidor
                 }
             } while (aux == -1);
             return aux;       
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static int GetNroSerie()
+        {
+            int aux = -1;
+            do
+            {
+                Console.WriteLine("Ingresar Numero de Serie");
+                if (!int.TryParse(Console.ReadLine().Trim(), out aux))
+                {
+                    Console.WriteLine("El numero de serie debe ser numerico");
+                    aux = -1;
+                }
+            } while (aux == -1);
+            return aux;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static int GetValor()
+        {
+            int aux = -1;
+            do
+            {
+                Console.WriteLine("Ingresar valor");
+                if (!int.TryParse(Console.ReadLine().Trim(), out aux))
+                {
+                    Console.WriteLine("El valor debe ser numerico");
+                    aux = -1;
+                }
+                else if (aux < 0 || aux > 1000)
+                {
+                    Console.WriteLine("El valor debe ser entre 0 y 1000");
+                    aux = -1;
+                }
+
+            } while (aux == -1);
+            return aux;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static int GetEstado()
+        {
+            int aux = -1;
+            do
+            {
+                Console.WriteLine("¿Ingresar Estado?");
+                Console.WriteLine("1. Si");
+                Console.WriteLine("2. No");
+                if (!int.TryParse(Console.ReadLine().Trim(), out aux))
+                {
+                    Console.WriteLine("La confirmacion debe ser numerica");
+                    aux = -1;
+                }
+                else if (aux != 1 && aux != 2)
+                {
+                    Console.WriteLine("La confirmacion debe ser 1 o 2");
+                    aux = -1;
+                }
+
+            } while (aux == -1);
+            return aux;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static int GetSeleccion()
+        {
+            int aux = -2;
+            do
+            {
+                Console.WriteLine("Seleccione estado");
+                Console.WriteLine("-1. Error de lectura");
+                Console.WriteLine("0. OK");
+                Console.WriteLine("1. Punto de carga lleno");
+                Console.WriteLine("2. Requiere mantencion preventiva");
+                if (!int.TryParse(Console.ReadLine().Trim(), out aux))
+                {
+                    Console.WriteLine("El Estado debe ser numerico");
+                    aux = -2;
+                }
+                else if (aux != -1 && aux != 0 && aux != 1 && aux != 2)
+                {
+                    Console.WriteLine("Debe seleccionar un estado de la lista");
+                    aux = -2;
+                }
+
+
+            } while (aux == -2);
+            return aux;
         }
     }
 }

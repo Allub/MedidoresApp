@@ -31,6 +31,7 @@ namespace ClienteMedidor
                 // cliente envia primer mensaje
                 clienteSocket.Escribir(mensaje);
 
+                // se recibe el mensaje de confirmacion
                 string mensajeRecibido = clienteSocket.Leer();
                 Console.WriteLine(mensajeRecibido);
                 string[] formatos2 = mensajeRecibido.Split('|');
@@ -39,59 +40,44 @@ namespace ClienteMedidor
                 if (confPeticion.Equals("WAIT"))
                 {
                     Console.WriteLine("Actualizacion de estado");
-                    Console.WriteLine("Ingresar Numero de Serie");
-                    string nro_serie = Console.ReadLine().Trim();
-                    Console.WriteLine("Ingresar fecha");
-                    string fechaAct = Console.ReadLine().Trim();
-                    Console.WriteLine("Ingresar tipo");
-                    Console.WriteLine("1. Trafico");
-                    Console.WriteLine("2. Consumo");
-                    string tipoN = Console.ReadLine().Trim();
-                    Console.WriteLine("Ingresar valor");
-                    string valor = Console.ReadLine().Trim();
-                    Console.WriteLine("¿Ingresar Estado?");
-                    Console.WriteLine("1. Si");
-                    Console.WriteLine("2. No");
-                    string estado = Console.ReadLine().Trim();
-                    int estadoNum = int.Parse(estado);
-                    if (estadoNum == 1)
+                    int nro_serie = GetNroSerie();
+                    string fechaAct = GetFecha();
+                    int TipoN = GetTipo();
+                    int valor = GetValor();
+                    int estado = GetEstado();
+                    if (estado == 1)
                     {
-                        Console.WriteLine("Seleccione estado");
-                        Console.WriteLine("-1. Error de lectura");
-                        Console.WriteLine("0. OK");
-                        Console.WriteLine("1. Punto de carga lleno");
-                        Console.WriteLine("2. Requiere mantencion preventiva");
-                        string estadoSelec = Console.ReadLine().Trim();
-                        int estadoSelecNum = int.Parse(estadoSelec);
-                        if (estadoSelecNum == -1)
+                        int seleccion = GetSeleccion();
+                        if (seleccion == -1)
                         {
-                            estadoSelecNum = -1;
+                            seleccion = -1;
                         }
-                        else if (estadoSelecNum == 0)
+                        else if (seleccion == 0)
                         {
-                            estadoSelecNum = 0;
+                            seleccion = 0;
                         }
-                        else if (estadoSelecNum == 1)
+                        else if (seleccion == 1)
                         {
-                            estadoSelecNum = 1;
+                            seleccion = 1;
                         }
-                        else if (estadoSelecNum == 2)
+                        else if (seleccion == 2)
                         {
-                            estadoSelecNum = 2;
+                            seleccion = 2;
                         }
                     }
-                    else if (estadoNum == 2)
+                    else if (estado == 2)
                     {
-                        estado = "sinEstado";
+                        estado = 11;
                     }
                     clienteSocket.Escribir(nro_serie + "|" + fecha + "|" + tipo + "|" + valor + "|" + estado + "|UPDATE");
 
                 }
                 else
                 {
-                    Console.WriteLine("error");
+                    Console.WriteLine("error en la actualizacion");
+                    clienteSocket.Desconectar();
                 }
-                clienteSocket.Desconectar();
+                
 
 
 

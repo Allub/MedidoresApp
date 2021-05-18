@@ -28,13 +28,15 @@ namespace ServicioComunicacion
             TimeSpan diferencia = fechaFormat - DateTime.Now;
             double diferenciaMinutos = diferencia.TotalMinutes;
 
-            if (diferenciaMinutos < 30)
+            if (diferenciaMinutos < 30 || diferenciaMinutos > 30)
             {
+                
                 return true;
 
             }
             else
             {
+                Console.WriteLine(diferenciaMinutos); Console.WriteLine(diferenciaMinutos);
                 return false;
 
             }

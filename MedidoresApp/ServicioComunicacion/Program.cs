@@ -46,15 +46,16 @@ namespace ServicioComunicacion
                             //se lee el primer mensaje del cliente
                             mensaje = servidor.Leer();
 
-                            
+                            //split del primer mensaje
                             string[] formatMensaje = mensaje.Split('|');
                             string fecha, nro_medidor, tipo;
                             fecha = formatMensaje[0];
                             nro_medidor = formatMensaje[1];
                             tipo = formatMensaje[2];
-
                             Console.WriteLine(fecha + "|" + nro_medidor + "|" + tipo);
+                            //parsea el tipo
                             int tipoInt = int.Parse(tipo);
+                            //si tipo es 1
                             if (tipoInt == 1)
                             {
                                 if (validadorFecha(fecha) && validarNroMTrafico(nro_medidor))
@@ -88,7 +89,7 @@ namespace ServicioComunicacion
                                 }
                                 else 
                                 {
-                                    Console.WriteLine("incorrecto");
+                                    Console.WriteLine("Medidor no encontrado");
                                 }
                                
                                 
@@ -124,7 +125,7 @@ namespace ServicioComunicacion
                                 }
                                 else
                                 {
-                                    Console.WriteLine("incorrecto");
+                                    Console.WriteLine("Medidor no encontrado");
                                 }
                             }
                             else
