@@ -55,12 +55,15 @@ namespace ServicioComunicacion
                             Console.WriteLine(fecha + "|" + nro_medidor + "|" + tipo);
                             //parsea el tipo
                             int tipoInt = int.Parse(tipo);
-                            //si tipo es 1
+                            //si tipo es 1, trafico
                             if (tipoInt == 1)
                             {
+                                //si fecha es menor a 30 min y nro medidor de trafico se encuentra
                                 if (validadorFecha(fecha) && validarNroMTrafico(nro_medidor))
                                 {
+                                    //servidor manda mensaje donde va la fecha actual + |WAIT
                                     servidor.Escribir(DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+"|WAIT");
+                                    //servidor recibe segundo mensaje
                                     string actualizacion = servidor.Leer();
                                     Console.WriteLine(actualizacion);
                                     string[] formatActua = actualizacion.Split('|');
@@ -89,7 +92,8 @@ namespace ServicioComunicacion
                                 }
                                 else 
                                 {
-                                    Console.WriteLine("Medidor no encontrado");
+                                    Console.WriteLine("Error en el ingreso");
+                                    servidor.Escribir("Error en el ingreso");
                                 }
                                
                                 

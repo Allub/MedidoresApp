@@ -10,6 +10,7 @@ namespace ServicioComunicacion
 {
     public partial class Program
     {
+
         static IMedidorTraficoDAL dalMt = MedidorTraficoFactory.CreateDal();
         static IMedidorConsumoDAL dalMc = MedidorConsumoFactory.CreateDal();
         static ILecturaDAL dalLe = LecturaFactory.CreateDal();
@@ -27,18 +28,14 @@ namespace ServicioComunicacion
             DateTime fechaFormat = DateTime.Parse(fecha);
             TimeSpan diferencia = fechaFormat - DateTime.Now;
             double diferenciaMinutos = diferencia.TotalMinutes;
-
-            if (diferenciaMinutos < 30 || diferenciaMinutos > 30)
+            double diferenciaMinutosPos = Math.Abs(diferenciaMinutos);
+            if (diferenciaMinutosPos > 30)
             {
-                
-                return true;
-
+                return false;
             }
             else
             {
-                Console.WriteLine(diferenciaMinutos); Console.WriteLine(diferenciaMinutos);
-                return false;
-
+                return true;
             }
 
         }
