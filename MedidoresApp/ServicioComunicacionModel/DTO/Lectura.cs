@@ -9,28 +9,22 @@ namespace ServicioComunicacionModel.DTO
 
     public class Lectura 
     {
-        private String fecha;
+        private DateTime fecha;
         private string valor;
-        private int tipo;
-        private string unidadMedida;
+        private int  tipo;
+        
         private string estado;
         private string nroSerie;
-
-        
-        
-      
+        private string unidadMedida;
 
 
-        public string Valor { get => valor; set => valor = value; }
-        public int Tipo { get => tipo; set => tipo = value; }
-        public string UnidadMedida { get => unidadMedida; set => unidadMedida = value; }
-        public string Estado { get => estado; set => estado = value; }
         public string NroSerie { get => nroSerie; set => nroSerie = value; }
-        public string Fecha { get => fecha; set => fecha = value; }
+        public DateTime Fecha { get => fecha; set => fecha = value; }
+        public int Tipo { get => tipo; set => tipo = value; }
+        public string Valor { get => valor; set => valor = value; }
+        public string Estado { get => estado; set => estado = value; }
+        
+       
 
-        public override string ToString()
-        {
-            return nroSerie + "|" + Fecha + "|" + Tipo + "|" + Valor + "|" + Estado +"|"+ "UPDATE";
-        }
     }
 }

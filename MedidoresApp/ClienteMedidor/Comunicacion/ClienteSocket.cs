@@ -41,7 +41,6 @@ namespace ClienteMedidor.Comunicacion
             }
             catch (IOException ex)
             {
-
                 return false;
             }
         }

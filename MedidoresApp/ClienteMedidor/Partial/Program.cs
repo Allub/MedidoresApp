@@ -10,11 +10,11 @@ namespace ClienteMedidor
     public partial class Program
     {
         /// <summary>
-        /// se obtiene en string lo que ingresa el usuario
+        /// se obtiene en string desde el usuario
         /// si no se puede hacer el parce, aux pasa a -1 y se repite el ciclo
         /// sino si aux es diferente a 1 y 2, aux pasa a -1 y se repite el ciclo
         /// </summary>
-        /// <returns>aux correcto ingresado por usuario</returns>
+        /// <returns>tipo correcto ingresado por usuario</returns>
         public static int GetTipo()
         {
             int aux = -1;
@@ -38,7 +38,7 @@ namespace ClienteMedidor
             return aux;
         }
         /// <summary>
-        /// se obtiene string ingresado por el usuario
+        /// se obtiene string desde el usuario
         /// se convierte en un array de string quitando el simbolo -
         /// se hace trycatch, en caso de no poder dar un string a la variables de la fecha
         /// cae en excepcion y fecha pasa a null
@@ -56,9 +56,14 @@ namespace ClienteMedidor
             string horas = "";
             string minutos = "";
             string segundos = "";
+            int mesesint = -1;
+            int diasint = -1;
+            int horasint = -1;
+            int minutosint = -1;
+            int segundosint = -1;
             do
             {
-                Console.WriteLine("Ingrese Fecha Actual del servidor en formato yyyy-MM-dd-HH-mm-ss");
+                Console.WriteLine("Ingrese Fecha en formato yyyy-MM-dd-HH-mm-ss");
                 string fechaFormat = Console.ReadLine().Trim();
                 string[] formatos = fechaFormat.Split('-');
                 try
@@ -70,6 +75,11 @@ namespace ClienteMedidor
                     minutos = formatos[4];
                     segundos = formatos[5];
                     fecha = años + "-" + meses + "-" + dias + " " + horas + ":" + minutos + ":" + segundos;
+                    mesesint = int.Parse(meses);
+                    diasint = int.Parse(dias);
+                    horasint = int.Parse(horas);
+                    minutosint = int.Parse(minutos);
+                    segundosint = int.Parse(segundos);
                 }
                 catch (Exception ex)
                 {
@@ -78,16 +88,17 @@ namespace ClienteMedidor
                 }
               
             } while (fecha == null || años.Length != 4 || meses.Length != 2 || dias.Length != 2 
-            || horas.Length != 2 || minutos.Length != 2 || segundos.Length != 2);
+            || horas.Length != 2 || minutos.Length != 2 || segundos.Length != 2 || mesesint > 12 
+            || diasint > 31 || horasint > 23 || minutosint > 59 || segundosint > 59);
             return fecha;
         }
 
         /// <summary>
-        /// se obtiene en string lo que ingresa el usuario
+        /// se obtiene en string desde el usuario
         /// si no se puede hacer el parce, aux pasa a -1 y se repite el ciclo
         /// sino si aux es menor a 0 o mayor a 9, aux pasa a -1 y se repite el ciclo
         /// </summary>
-        /// <returns>aux coorecto ingresador por usuario</returns>
+        /// <returns>nroMedidor correcto ingresador por usuario</returns>
         public static int GetNroMedidor()
         {
             int aux = -1;
@@ -108,9 +119,10 @@ namespace ClienteMedidor
             return aux;       
         }
         /// <summary>
-        /// 
+        /// se obtiene int desde el usuario
+        /// si no se puede hacer el parce, aux pasa a -1 y se repite el ciclo
         /// </summary>
-        /// <returns></returns>
+        /// <returns>nroSerie correcto</returns>
         public static int GetNroSerie()
         {
             int aux = -1;
@@ -126,9 +138,11 @@ namespace ClienteMedidor
             return aux;
         }
         /// <summary>
-        /// 
+        /// se obtiene int desde el usuario
+        /// si no se puede hacer el parce, aux pasa a -1 y se repite el ciclo
+        /// sino si aux es menor a 0 o mayor a 1000, aux pasa a -1 y se repite el ciclo
         /// </summary>
-        /// <returns></returns>
+        /// <returns>valor correcto</returns>
         public static int GetValor()
         {
             int aux = -1;
@@ -150,9 +164,11 @@ namespace ClienteMedidor
             return aux;
         }
         /// <summary>
-        /// 
+        /// se obtiene estado int desde el usuario
+        /// si no se puede hacer el parce, aux pasa a -1 y se repite el ciclo
+        /// sino si aux es distinto a 1 o distinto a 2, aux pasa a -1 y se repite el ciclo
         /// </summary>
-        /// <returns></returns>
+        /// <returns>estado correcto</returns>
         public static int GetEstado()
         {
             int aux = -1;
@@ -177,9 +193,11 @@ namespace ClienteMedidor
         }
 
         /// <summary>
-        /// 
+        /// se obtiene seleccion de estado int desde el usuario
+        /// si no se puede hacer el parce, aux pasa a -2 y se repite el ciclo
+        /// sino si aux es distinto a -1,0,1,2, aux pasa a -2 y se repite el ciclo 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>seleccion de tipo correto</returns>
         public static int GetSeleccion()
         {
             int aux = -2;

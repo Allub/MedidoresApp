@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace ServicioComunicacionModel.DTO
 {
-    public class MedidorConsumo : Medidor
+    public class MedidorConsumo
     {
         private int nro_medidor;
+        private int id;
 
-      
-
-        public MedidorConsumo(int nro_medidor, int pId)
-            : base(pId)
+        public MedidorConsumo(int nro_medidor, int id)
         {
-            this.id = pId;
-            this.Nro_medidor = nro_medidor;
+            this.nro_medidor = nro_medidor;
+            this.id = id;
         }
 
         public int Nro_medidor { get => nro_medidor; set => nro_medidor = value; }
+        public int Id { get => id; set => id = value; }
 
         public override string ToString()
         {

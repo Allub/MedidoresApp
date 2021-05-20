@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using ServicioComunicacionModel.DTO;
 
 namespace ServicioComunicacionModel.DAL
@@ -45,7 +46,7 @@ namespace ServicioComunicacionModel.DAL
                             Lectura l = new Lectura()
                             {
                                 NroSerie = textoArray[0],
-                                Fecha = textoArray[1],
+                                Fecha = Convert.ToDateTime(textoArray[1]),
                                 Tipo = int.Parse(textoArray[2]),
                                 Valor = textoArray[3],
                                 Estado = textoArray[4]
@@ -88,7 +89,7 @@ namespace ServicioComunicacionModel.DAL
                             Lectura l = new Lectura()
                             {
                                 NroSerie = textoArray[0],
-                                Fecha = textoArray[1],
+                                Fecha = Convert.ToDateTime(textoArray[1]),
                                 Tipo = int.Parse(textoArray[2]),
                                 Valor = textoArray[3],
                                 Estado = textoArray[4]
@@ -121,7 +122,11 @@ namespace ServicioComunicacionModel.DAL
                 {
                     writer.WriteLine(l);
                     writer.Flush();
+
                 }
+                string json = JsonConvert.SerializeObject(l);
+                File.WriteAllText(archivo, json);
+
 
             }
             catch (IOException ex)
@@ -131,12 +136,13 @@ namespace ServicioComunicacionModel.DAL
             }
         }
 
-      
+
             
             private string archivoTrafico = Directory.GetCurrentDirectory()
             + Path.DirectorySeparatorChar + "traficos.txt";
             private string archivoConsumo = Directory.GetCurrentDirectory()
             + Path.DirectorySeparatorChar + "consumos.txt";
+     
     
         
     }
